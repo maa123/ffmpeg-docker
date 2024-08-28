@@ -433,6 +433,7 @@ if [ "${TARGET_OS}" = "Linux" ]; then
   mkcd build
   do_meson "-Ddriverdir=${PREFIX}/lib/dri" ..
   do_ninja_and_ninja_install
+  find ${PREFIX}/lib/dri -name "*.so" -exec strip --strip-debug {} \;
   cp_archive ${PREFIX}/lib/dri ${RUNTIME_LIB_DIR}
 
   # Build oneVPL gpu runtime
