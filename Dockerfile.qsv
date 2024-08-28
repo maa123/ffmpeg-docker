@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile:1.5
 
-ARG FFMPEG_VERSION="6.0"
+ARG FFMPEG_VERSION="7.0"
 
 
 #
