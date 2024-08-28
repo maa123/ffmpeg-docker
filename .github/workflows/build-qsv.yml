@@ -6,6 +6,8 @@ on:
     branches: ["master", "qsv"]
     paths:
       - ".github/workflows/build-qsv.yml"
+      - "Dockerfile.qsv"
+      - "scripts/**"
   workflow_dispatch:
 
 jobs:
