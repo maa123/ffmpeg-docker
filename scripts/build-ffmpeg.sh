@@ -4,7 +4,7 @@ source ./base.sh
 mkdir -p ${ARTIFACT_DIR}
 
 # Build ffmpeg
-FFMPEG_VERSION="${FFMPEG_VERSION:-"6.0"}"
+FFMPEG_VERSION="${FFMPEG_VERSION:-"6.1"}"
 git_clone "https://github.com/FFmpeg/FFmpeg.git" n${FFMPEG_VERSION}
 
 FFMPEG_LIBVPL_SUPPORT_VERSION="6.0"
