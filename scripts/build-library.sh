@@ -206,12 +206,12 @@ make install
 FFMPEG_CONFIGURE_OPTIONS+=("--enable-libx265")
 
 # Build libaom
-LIBAOM_VERSION="3.7.0"
-git_clone "https://aomedia.googlesource.com/aom" v${LIBAOM_VERSION}
-mkcd _build
-do_cmake "-DAOM_TARGET_CPU=x86_64 -DBUILD_SHARED_LIBS=0 -DENABLE_NASM=1 -DENABLE_DOCS=0 -DENABLE_TESTS=0 -DENABLE_EXAMPLES=0" ..
-do_make_and_make_install
-FFMPEG_CONFIGURE_OPTIONS+=("--enable-libaom")
+# LIBAOM_VERSION="3.7.0"
+# git_clone "https://aomedia.googlesource.com/aom" v${LIBAOM_VERSION}
+# mkcd _build
+# do_cmake "-DAOM_TARGET_CPU=x86_64 -DBUILD_SHARED_LIBS=0 -DENABLE_NASM=1 -DENABLE_DOCS=0 -DENABLE_TESTS=0 -DENABLE_EXAMPLES=0" ..
+# do_make_and_make_install
+# FFMPEG_CONFIGURE_OPTIONS+=("--enable-libaom")
 
 # Build vmaf
 VMAF_VERSION="2.3.1"
@@ -362,10 +362,10 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-sdl2")
 #
 
 # Build NVcodec
-NVCODEC_VERSION="n12.0.16.0"
-git_clone "https://github.com/FFmpeg/nv-codec-headers" ${NVCODEC_VERSION}
-make install "PREFIX=${PREFIX}"
-FFMPEG_CONFIGURE_OPTIONS+=("--enable-cuda-llvm" "--enable-ffnvcodec" "--enable-cuvid" "--enable-nvdec" "--enable-nvenc")
+# NVCODEC_VERSION="n12.0.16.0"
+# git_clone "https://github.com/FFmpeg/nv-codec-headers" ${NVCODEC_VERSION}
+# make install "PREFIX=${PREFIX}"
+# FFMPEG_CONFIGURE_OPTIONS+=("--enable-cuda-llvm" "--enable-ffnvcodec" "--enable-cuvid" "--enable-nvdec" "--enable-nvenc")
 
 if [ "${TARGET_OS}" = "Linux" ]; then
   # Build libdrm
