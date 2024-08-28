@@ -1,0 +1,47 @@
+name: Build ffmpeg qsv debian
+permissions:
+  packages: write
+on:
+  push:
+    branches: ["master", "qsv"]
+    paths:
+      - ".github/workflows/build-qsv-debian.yml"
+      - "debian.Dockerfile.qsv"
+      - "scripts/**"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push ffmpeg library
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: debian.Dockerfile.qsv
+          push: true
+          target: ffmpeg-library
+          tags: ghcr.io/maa123/ffmpeg-docker/qsv/debian-ffmpeg-library:latest
+          cache-from: type=gha,scope=debian-ffmpeg-qsv-library
+          cache-to: type=gha,mode=max,scope=debian-ffmpeg-qsv-library
+      
+      - name: Build and push ffmpeg container
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: debian.Dockerfile.qsv
+          push: true
+          target: ffmpeg-linux
+          tags: ghcr.io/maa123/ffmpeg-docker/qsv/debian-ffmpeg:latest
+          cache-from: type=gha,scope=debian-ffmpeg-qsv
+          cache-to: type=gha,mode=max,scope=debian-ffmpeg-qsv
