@@ -34,3 +34,14 @@ jobs:
           tags: ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:latest
           cache-from: type=gha,scope=ffmpeg-qsv-library
           cache-to: type=gha,mode=max,scope=ffmpeg-qsv-library
+      
+      - name: Build and push ffmpeg container
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.qsv
+          push: true
+          target: ffmpeg-linux
+          tags: ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg:latest
+          cache-from: type=gha,scope=ffmpeg-qsv
+          cache-to: type=gha,mode=max,scope=ffmpeg-qsv
