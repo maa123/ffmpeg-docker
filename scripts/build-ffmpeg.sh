@@ -3,9 +3,14 @@
 source ./base.sh
 mkdir -p ${ARTIFACT_DIR}
 
-# Build ffmpeg 
+# Build ffmpeg
 FFMPEG_VERSION="${FFMPEG_VERSION:-"7.0"}"
 git_clone "https://github.com/FFmpeg/FFmpeg.git" n${FFMPEG_VERSION}
+curl https://git.ffmpeg.org/gitweb/ffmpeg.git/commitdiff_plain/effadce6c756247ea8bae32dc13bb3e6f464f0eb > /ffmpeg_commit.diff
+cd n${FFMPEG_VERSION}
+patch -p1 < /ffmpeg_commit.diff
+cd ..
+rm -f /ffmpeg_commit.diff
 
 FFMPEG_LIBVPL_SUPPORT_VERSION="6.0"
 if [ "${FFMPEG_VERSION}" != "${FFMPEG_LIBVPL_SUPPORT_VERSION}" ]; then
