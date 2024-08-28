@@ -104,8 +104,7 @@ ENV TARGET_OS="Linux"
 ADD ./scripts/build-ffmpeg.sh ./
 
 # Copy ffmpeg-library image
-COPY --from=ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:linux / /
-
+COPY --from=ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:latest / /
 # Build ffmpeg
 RUN bash ./build-ffmpeg.sh
 
@@ -123,7 +122,7 @@ EOT
 #
 # final ffmpeg-linux image
 #
-FROM ubuntu:22.04 AS ffmpeg-linux
+FROM ubuntu:24.04 AS ffmpeg-linux
 
 SHELL ["/bin/sh", "-e", "-c"]
 
@@ -146,7 +145,7 @@ CMD [ "--help" ]
 #
 # export image
 #
-FROM ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg:${FFMPEG_VERSION} AS ffmpeg-linux-image
+FROM ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg:latest AS ffmpeg-linux-image
 FROM scratch AS ffmpeg-linux-export
 
 COPY --from=ffmpeg-linux-image /usr/local/bin /bin
@@ -158,12 +157,12 @@ COPY --from=ffmpeg-linux-image /usr/local/run.sh /
 #
 # vainfo build image
 #
-FROM ubuntu:22.04 AS vainfo-build
+FROM ubuntu:24.04 AS vainfo-build
 
 SHELL ["/bin/bash", "-e", "-c"]
 
 # Copy ffmpeg-library image
-COPY --from=ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:linux / /
+COPY --from=ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:latest / /
 
 # Copy vainfo library
 RUN <<EOT
@@ -181,7 +180,7 @@ EOT
 #
 # vainfo image
 #
-FROM ubuntu:22.04 AS vainfo
+FROM ubuntu:24.04 AS vainfo
 
 SHELL ["/bin/bash", "-e", "-c"]
 
