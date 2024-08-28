@@ -446,17 +446,17 @@ if [ "${TARGET_OS}" = "Linux" ]; then
   cp_archive ${PREFIX}/lib/libmfx-gen.so* ${RUNTIME_LIB_DIR}
 
   # Build MediaSDK
-  MEDIASDK_VERSION="23.2.2"
-  MEDIASDK_TAG="intel-mediasdk-${MEDIASDK_VERSION}"
-  git_clone "https://github.com/Intel-Media-SDK/MediaSDK.git" ${MEDIASDK_TAG} ${MEDIASDK_VERSION}
-  mkcd build
-  do_cmake ..
-  do_make_and_make_install
-  gen_implib ${PREFIX}/lib/{libmfx.so.1,libmfx.a}
-  cp_archive ${PREFIX}/lib/mfx ${RUNTIME_LIB_DIR}
-  cp_archive ${PREFIX}/lib/libmfx.so* ${RUNTIME_LIB_DIR}
-  cp_archive ${PREFIX}/lib/libmfxhw64.so* ${RUNTIME_LIB_DIR}
-  rm ${PREFIX}/lib/libmfx.so*
+  # MEDIASDK_VERSION="23.2.2"
+  # MEDIASDK_TAG="intel-mediasdk-${MEDIASDK_VERSION}"
+  # git_clone "https://github.com/Intel-Media-SDK/MediaSDK.git" ${MEDIASDK_TAG} ${MEDIASDK_VERSION}
+  # mkcd build
+  # do_cmake ..
+  # do_make_and_make_install
+  # gen_implib ${PREFIX}/lib/{libmfx.so.1,libmfx.a}
+  # cp_archive ${PREFIX}/lib/mfx ${RUNTIME_LIB_DIR}
+  # cp_archive ${PREFIX}/lib/libmfx.so* ${RUNTIME_LIB_DIR}
+  # cp_archive ${PREFIX}/lib/libmfxhw64.so* ${RUNTIME_LIB_DIR}
+  # rm ${PREFIX}/lib/libmfx.so*
 fi
 
 # Build oneVPL
