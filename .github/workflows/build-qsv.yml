@@ -32,5 +32,5 @@ jobs:
           push: true
           target: ffmpeg-library
           tags: ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:latest
-          cache-from: type=gha,scope=test-ffmpeg
-          cache-to: type=gha,mode=max,scope=test-ffmpeg
+          cache-from: type=gha,scope=ffmpeg-qsv-library
+          cache-to: type=gha,mode=max,scope=ffmpeg-qsv-library
