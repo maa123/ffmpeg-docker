@@ -109,7 +109,7 @@ if [ "${TARGET_OS}" = "Linux" ]; then
   # mkcd build
   # do_meson "-Dzlib=enabled -Ddefault_library=shared" ..
   # do_ninja_and_ninja_install
-  do_configure "--enable-shared --disable-static --with-pic --with-zlib --with-zlib-prefix=${PREFIX}/lib/"
+  do_configure "--enable-shared --disable-static --with-pic --with-zlib"
   do_make_and_make_install
   gen_implib ${PREFIX}/lib/{libpciaccess.so.0,libpciaccess.a}
   cp_archive ${PREFIX}/lib/libpciaccess.so* ${RUNTIME_LIB_DIR}
