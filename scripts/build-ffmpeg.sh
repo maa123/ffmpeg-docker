@@ -56,6 +56,7 @@ esac
 # Build
 do_make_and_make_install
 
+find ${PREFIX}/bin -type f -name "ff*" -executable -exec strip --strip-debug {} \;
 
 #
 # Finalize
