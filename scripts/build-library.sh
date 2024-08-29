@@ -16,7 +16,7 @@ do_configure
 do_make_and_make_install
 
 # Build zlib
-ZLIB_VERSION="1.3"
+ZLIB_VERSION="1.3.1"
 git_clone https://github.com/madler/zlib.git "v${ZLIB_VERSION}"
 CC=${CROSS_PREFIX}gcc AR=${CROSS_PREFIX}ar RANLIB=${CROSS_PREFIX}ranlib ./configure --prefix=${PREFIX} --static
 do_make_and_make_install
@@ -44,7 +44,7 @@ EOS
 ln -s ${PKG_CONFIG_PATH}/bz2.pc ${PKG_CONFIG_PATH}/bzip2.pc
 
 # Build lzma
-LZMA_VERSION="5.4.4"
+LZMA_VERSION="5.6.2"
 git_clone "https://github.com/tukaani-project/xz.git" v${LZMA_VERSION}
 ./autogen.sh --no-po4a --no-doxygen
 do_configure "--enable-static --disable-shared --with-pic --disable-symbol-versions
@@ -53,7 +53,7 @@ do_make_and_make_install
 FFMPEG_CONFIGURE_OPTIONS+=("--enable-lzma")
 
 # Build Nettle (for gmp,gnutls)
-NETTLE_VERSION="3.9.1"
+NETTLE_VERSION="3.10"
 download_and_unpack_file "https://ftp.jaist.ac.jp/pub/GNU/nettle/nettle-${NETTLE_VERSION}.tar.gz"
 do_configure "--enable-static --disable-shared --libdir=${PREFIX}/lib --enable-mini-gmp --disable-openssl --disable-documentation"
 do_make_and_make_install
@@ -72,7 +72,7 @@ do_configure "--enable-static --disable-shared"
 do_make_and_make_install
 
 # Build libunistring (for gnutls)
-LIBUNISTRING_VERSION="1.1"
+LIBUNISTRING_VERSION="1.2"
 download_and_unpack_file "https://ftp.jaist.ac.jp/pub/GNU/libunistring/libunistring-${LIBUNISTRING_VERSION}.tar.xz"
 do_configure "--enable-static --disable-shared"
 do_make_and_make_install
@@ -86,7 +86,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-iconv")
 
 # Build GnuTLS
 GNUTLS_MAJAR_VERSION="3.8"
-GNUTLS_VERSION="${GNUTLS_MAJAR_VERSION}.1"
+GNUTLS_VERSION="${GNUTLS_MAJAR_VERSION}.4"
 download_and_unpack_file "https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_MAJAR_VERSION}/gnutls-${GNUTLS_VERSION}.tar.xz"
 do_configure "--enable-static --disable-shared --with-pic --disable-tests --disable-doc --disable-tools --without-p11-kit"
 do_make_and_make_install
@@ -103,7 +103,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-libsrt")
 
 if [ "${TARGET_OS}" = "Linux" ]; then
   # Build libpciaccess
-  LIBPCIACCESS_VERSION="0.17"
+  LIBPCIACCESS_VERSION="0.18.1"
   LIBPCIACCESS_TAG="libpciaccess-${LIBPCIACCESS_VERSION}"
   git_clone "https://gitlab.freedesktop.org/xorg/lib/libpciaccess.git" ${LIBPCIACCESS_TAG} ${LIBPCIACCESS_VERSION}
   do_configure "--enable-shared --disable-static --with-pic --with-zlib"
@@ -118,19 +118,19 @@ fi
 #
 
 # Build libpng (for libwebp)
-LIBPNG_VERSION="1.6.40"
+LIBPNG_VERSION="1.6.43"
 git_clone "https://github.com/glennrp/libpng.git" "v${LIBPNG_VERSION}"
 do_configure "--enable-static --disable-shared --with-pic"
 do_make_and_make_install
 
 # Build libjpeg (for libwebp)
-LIBJPEG_VERSION="9e"
+LIBJPEG_VERSION="9f"
 download_and_unpack_file "http://www.ijg.org/files/jpegsrc.v${LIBJPEG_VERSION}.tar.gz"
 do_configure "--enable-static --disable-shared --with-pic"
 do_make_and_make_install
 
 # Build openjpeg
-OPENJPEG_VERSION="2.5.0"
+OPENJPEG_VERSION="2.5.2"
 git_clone "https://github.com/uclouvain/openjpeg.git" "v${OPENJPEG_VERSION}"
 mkcd build
 do_cmake "-DBUILD_SHARED_LIBS=0 -DDBUILD_PKGCONFIG_FILES=1 -DBUILD_CODEC=0 -DWITH_ASTYLE=0 -DBUILD_TESTING=0" ..
@@ -138,7 +138,7 @@ do_make_and_make_install
 FFMPEG_CONFIGURE_OPTIONS+=("--enable-libopenjpeg")
 
 # Build libwebp
-LIBWEBP_VERSION="1.3.1"
+LIBWEBP_VERSION="1.4.0"
 git_clone "https://chromium.googlesource.com/webm/libwebp.git" "v${LIBWEBP_VERSION}"
 do_configure "--enable-static --disable-shared --with-pic --enable-libwebpmux --enable-png --enable-jpeg
               --disable-libwebpextras --disable-libwebpdemux --disable-sdl --disable-gl --disable-tiff --disable-gif"
@@ -151,7 +151,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-libwebp")
 #
 
 # Build libvpx
-LIBVPX_VERSION="1.13.0"
+LIBVPX_VERSION="1.14.1"
 git_clone "https://chromium.googlesource.com/webm/libvpx" v${LIBVPX_VERSION}
 if [ "${TARGET_OS}" = "Windows" ]; then
   CROSS=${CROSS_PREFIX} ./configure --prefix="${PREFIX}" --target=x86_64-win64-gcc --disable-shared \
@@ -171,7 +171,7 @@ do_make_and_make_install
 FFMPEG_CONFIGURE_OPTIONS+=("--enable-libx264")
 
 # Build x265
-X265_VERSION="3.5"
+X265_VERSION="3.6"
 git_clone "https://bitbucket.org/multicoreware/x265_git" "${X265_VERSION}"
 mkcd build
 mkdir -p 8bit 10bit 12bit
@@ -231,7 +231,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-libvmaf")
 #
 
 # Build opus
-OPUS_VERSION="1.4"
+OPUS_VERSION="1.5.2"
 git_clone "https://github.com/xiph/opus.git" v${OPUS_VERSION}
 mkcd build
 if [ "${TARGET_OS}" = "Windows" ]; then
