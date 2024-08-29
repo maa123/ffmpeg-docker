@@ -3,6 +3,10 @@
 source ./base.sh
 mkdir -p ${ARTIFACT_DIR}
 
+apt-get update && apt-get install -y --no-install-recommends \
+  gnutls
+rm -rf /var/lib/apt/lists/*
+
 # Build ffmpeg
 FFMPEG_VERSION="${FFMPEG_VERSION:-"7.0"}"
 git_clone "https://github.com/FFmpeg/FFmpeg.git" n${FFMPEG_VERSION}
