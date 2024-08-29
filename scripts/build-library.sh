@@ -103,14 +103,14 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-libsrt")
 
 if [ "${TARGET_OS}" = "Linux" ]; then
   # Build libpciaccess
-  LIBPCIACCESS_VERSION="0.18.1"
+  LIBPCIACCESS_VERSION="0.17.0"
   LIBPCIACCESS_TAG="libpciaccess-${LIBPCIACCESS_VERSION}"
   git_clone "https://gitlab.freedesktop.org/xorg/lib/libpciaccess.git" ${LIBPCIACCESS_TAG} ${LIBPCIACCESS_VERSION}
-  mkcd build
-  do_meson "-Dzlib=enabled -Ddefault_library=shared" ..
-  do_ninja_and_ninja_install
-  # do_configure "--enable-shared --disable-static --with-pic --with-zlib"
-  # do_make_and_make_install
+  # mkcd build
+  # do_meson "-Dzlib=enabled -Ddefault_library=shared" ..
+  # do_ninja_and_ninja_install
+  do_configure "--enable-shared --disable-static --with-pic --with-zlib"
+  do_make_and_make_install
   gen_implib ${PREFIX}/lib/{libpciaccess.so.0,libpciaccess.a}
   cp_archive ${PREFIX}/lib/libpciaccess.so* ${RUNTIME_LIB_DIR}
   rm ${PREFIX}/lib/libpciaccess{.so*,.la}
