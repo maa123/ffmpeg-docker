@@ -46,7 +46,9 @@ apt-get install -y \
     subversion \
     wget \
     xxd \
-    yasm
+    yasm \
+    zlib1g \
+    zlib1g-dev
 EOT
 
 # Clone Implib.so
