@@ -86,7 +86,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-iconv")
 
 # Build GnuTLS
 GNUTLS_MAJAR_VERSION="3.8"
-GNUTLS_VERSION="${GNUTLS_MAJAR_VERSION}.4"
+GNUTLS_VERSION="${GNUTLS_MAJAR_VERSION}.7.1"
 download_and_unpack_file "https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_MAJAR_VERSION}/gnutls-${GNUTLS_VERSION}.tar.xz"
 do_configure "--enable-static --disable-shared --with-pic --disable-tests --disable-doc --disable-tools --without-p11-kit"
 do_make_and_make_install
