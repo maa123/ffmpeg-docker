@@ -106,7 +106,7 @@ if [ "${TARGET_OS}" = "Linux" ]; then
   LIBPCIACCESS_VERSION="0.18.1"
   LIBPCIACCESS_TAG="libpciaccess-${LIBPCIACCESS_VERSION}"
   git_clone "https://gitlab.freedesktop.org/xorg/lib/libpciaccess.git" ${LIBPCIACCESS_TAG} ${LIBPCIACCESS_VERSION}
-  do_meson "-Dzlib=enabled" .
+  do_meson "-Dzlib=enabled -Ddefault_library=shared"
   do_ninja_and_ninja_install
   # do_configure "--enable-shared --disable-static --with-pic --with-zlib"
   # do_make_and_make_install
