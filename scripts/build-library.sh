@@ -103,7 +103,7 @@ FFMPEG_CONFIGURE_OPTIONS+=("--enable-libsrt")
 
 if [ "${TARGET_OS}" = "Linux" ]; then
   # Build libpciaccess
-  LIBPCIACCESS_VERSION="0.17.0"
+  LIBPCIACCESS_VERSION="0.17"
   LIBPCIACCESS_TAG="libpciaccess-${LIBPCIACCESS_VERSION}"
   git_clone "https://gitlab.freedesktop.org/xorg/lib/libpciaccess.git" ${LIBPCIACCESS_TAG} ${LIBPCIACCESS_VERSION}
   # mkcd build
