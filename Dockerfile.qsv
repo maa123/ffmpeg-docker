@@ -139,6 +139,9 @@ COPY --from=ffmpeg-linux-build /dist /
 RUN ldconfig
 
 WORKDIR /workdir
+RUN curl -s https://raw.githubusercontent.com/intel/intel-device-plugins-for-kubernetes/main/cmd/gpu_plugin/render-device.sh -o render-device.sh \
+    && chmod +x render-device.sh \
+    && ./render-device.sh
 ENTRYPOINT [ "ffmpeg" ]
 CMD [ "--help" ]
 
