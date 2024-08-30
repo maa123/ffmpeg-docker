@@ -108,6 +108,10 @@ COPY --from=ghcr.io/maa123/ffmpeg-docker/qsv/ffmpeg-library:latest / /
 # Build ffmpeg
 RUN bash ./build-ffmpeg.sh
 
+RUN curl -s https://raw.githubusercontent.com/intel/intel-device-plugins-for-kubernetes/main/cmd/gpu_plugin/render-device.sh -o render-device.sh \
+    && chmod +x render-device.sh \
+    && mv ./render-device.sh /
+
 # Copy run.sh
 COPY --chmod=755 <<'EOT' ${ARTIFACT_DIR}/${PREFIX}/run.sh
 #!/bin/sh
@@ -139,9 +143,7 @@ COPY --from=ffmpeg-linux-build /dist /
 RUN ldconfig
 
 WORKDIR /workdir
-RUN curl -s https://raw.githubusercontent.com/intel/intel-device-plugins-for-kubernetes/main/cmd/gpu_plugin/render-device.sh -o render-device.sh \
-    && chmod +x render-device.sh \
-    && ./render-device.sh
+COPY --from=ffmpeg-linux-build /render-device.sh .
 ENTRYPOINT [ "ffmpeg" ]
 CMD [ "--help" ]
 
