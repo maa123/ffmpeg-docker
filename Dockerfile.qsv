@@ -208,7 +208,7 @@ ENTRYPOINT [ "/usr/local/bin/vainfo" ]
 #
 # node image
 #
-FROM node:current AS node
+FROM node:18 AS node
 FROM ffmpeg-linux AS ffmpeg-node-linux
 ENV DEBIAN_FRONTEND=noninteractive
 
